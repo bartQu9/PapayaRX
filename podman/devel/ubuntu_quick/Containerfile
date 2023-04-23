@@ -1,0 +1,14 @@
+FROM docker.io/library/ubuntu
+
+ARG DEBIAN_FRONTEND=noninteractive
+ENV TZ=Europe/Warsaw
+
+RUN apt-get -y update
+RUN apt-get -y install apt-utils less vim build-essential sudo cmake gdb 
+RUN apt-get -y install gnuradio gnuradio-dev gnuradio-doc libsndfile1-dev
+RUN useradd -m -s $(which bash) dev
+RUN usermod -aG sudo dev
+RUN echo '%sudo   ALL=(ALL:ALL) NOPASSWD:ALL' >> /etc/sudoers
+
+USER dev
+WORKDIR /home/dev/
