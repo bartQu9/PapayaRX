@@ -5,7 +5,9 @@ ENV TZ=Europe/Warsaw
 
 RUN apt-get -y update
 RUN apt-get -y install apt-utils less vim build-essential sudo cmake gdb 
+RUN apt-get -y install libsoapysdr-dev libsoapysdr0.8 soapysdr-module-bladerf soapysdr-module-hackrf soapysdr-module-uhd
 RUN apt-get -y install gnuradio gnuradio-dev gnuradio-doc libsndfile1-dev
+RUN apt-get -y install $(apt-cache search libgnuradio-* | awk '{print $1}')
 RUN useradd -m -s $(which bash) dev
 RUN usermod -aG sudo dev
 RUN echo '%sudo   ALL=(ALL:ALL) NOPASSWD:ALL' >> /etc/sudoers

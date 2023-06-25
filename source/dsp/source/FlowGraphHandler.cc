@@ -2,9 +2,8 @@
  *  SatLabAGH @ AGH UST
  *      Author: Bartosz Rudnicki
  *
- * FILE:  FlowGraphHandler.hh
+ * FILE:  FlowGraphHandler.cc
  *
- * DESCR: Flow Graphs management implementation
  */
 
 

@@ -4,13 +4,22 @@
  *
  * FILE:  FlowGraphHandler.hh
  *
- * DESCR: Flow Graphs management header file
+ * DESCR: Flow Graph management
  */
 
 #ifndef FLOWGRAPHHANDLER_HH
 #define FLOWGRAPHHANDLER_HH
 
+#include
 
+
+class FlowGraphHandler
+{
+public:
+
+private:
+
+}
 
 
 

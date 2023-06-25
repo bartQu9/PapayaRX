@@ -36,7 +36,16 @@ podman run --rm -it --userns keep-id --mount type=volume,source=<lib_vol_name>,d
 - replace `<git_proj_dir>` with the actual local git project directory, e.g. `~/git_repos/PapayaRX/
 ```
 - replace `<lib_vol_name>` with your _volume_ name (the one used for exporting header files)
-- If the host user you're running the container has UID other than 1000 (issue `id` to check) use `--userns nomap` instead of `--userns keep-id`, or configure UID/GID mappings so `dev` container user _UID_/_GID_ matches your host non-root user.
+- If the host user you're running the container has UID other than 1000, use `--userns nomap` instead of `--userns keep-id` or configure _UID_/_GID_ mappings so `dev` container user _UID_/_GID_ matches your host non-root user _UID_/_GID_.
+2. On the first run, copy lib headers from the container's fs to `<lib_vol_name>`. In container issue:
+```
+cp -r --parents /usr/include/gnuradio/ /shared_libs/
+cp -r --parents /usr/include/boost/ /shared_libs/
+cp -r --parents /usr/include/SoapySDR/ /shared_libs/
+```
 
 ### Building (Dev environment)
-1. Go to project dir inside container: ``
+1. Go to project dir inside container: `cd ./PapayaRX`
+2. Create `build` directory: `mkdir build`
+3. Build Makefiles `cmake ..`
+4. Build project `make -j8`
