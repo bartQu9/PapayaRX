@@ -1,12 +1,13 @@
 /*
- *
  *  SatLabAGH @ AGH UST
- *      Author: Bartosz Rudnicki
+ *      @author: Bartosz Rudnicki
  *
+ * @file:  main.cc
+ * @brief: Program entry file
  */
 
-#include "main.hh"
+#include "common.hh"
 
 int main(int argc, char **argv) {
-    return EXIT_SUCCESS;
+	return EXIT_SUCCESS;
 }

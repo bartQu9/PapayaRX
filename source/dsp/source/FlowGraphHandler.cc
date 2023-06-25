@@ -1,11 +1,14 @@
-/*
+/**
  *  SatLabAGH @ AGH UST
- *      Author: Bartosz Rudnicki
+ *      @author: Bartosz Rudnicki
  *
- * FILE:  FlowGraphHandler.cc
- *
+ * @file:  FlowGraphHandler.cc
+ * @brief: Flow Graph management implementation file
  */
 
+#include "FlowGraphHandler.hh"
 
-
-
+void FlowGraphHandler::run()
+{
+    topBlock->run();
+}

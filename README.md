@@ -24,7 +24,7 @@ exit
 3. Create symbolic link to the volume `ln -s $(podman volume inspect --format "{{.Mountpoint}}" <lib_vol_name>) $(git rev-parse --show-toplevel)/podman/devel/libs`
 4. Enter `podman/devel/<flavour>/` directory and run:
 `podman build --tag ubuntu_quick:latest --stdin ./`
-5. Arm yourself with patience and guide ubuntu's dpkg installers whenever needed by hitting `y`, `[enter]` etc.
+5. Arm yourself with patience and guide ubuntu's debconfs whenever needed by hitting `y`, `[enter]` etc.
 
 Once image has been built successfuly, you can move to launching container from its image.
 
@@ -44,7 +44,10 @@ podman run --rm -it --userns keep-id \
 cp -r --parents /usr/include/gnuradio/ /shared_libs/
 cp -r --parents /usr/include/boost/ /shared_libs/
 cp -r --parents /usr/include/SoapySDR/ /shared_libs/
+cp -r --parents /usr/include/c++/ /shared_libs/
+cp --parents /usr/include/* /shared_libs/ 2>/dev/null
 ```
+_NOTE: This step is not mandatory, I use this to have references to header files from Eclipse ID running on host (outside container)._
 
 ### Building (Dev environment)
 1. Go to project dir inside container: `cd ./PapayaRX`
