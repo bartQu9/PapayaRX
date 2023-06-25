@@ -21,7 +21,7 @@ podman unshare
 podman volume mount <lib_vol_name>
 exit
 ```
-3. Create symbolic link to the volume `ln -s $(podman volume inspect --format "{{.Mountpoint}}" <lib_vol_name>) $(git rev-parse --show-toplevel)/podman/devel/headers`
+3. Create symbolic link to the volume `ln -s $(podman volume inspect --format "{{.Mountpoint}}" <lib_vol_name>) $(git rev-parse --show-toplevel)/podman/devel/libs`
 4. Enter `podman/devel/<flavour>/` directory and run:
 `podman build --tag ubuntu_quick:latest --stdin ./`
 5. Arm yourself with patience and guide ubuntu's dpkg installers whenever needed by hitting `y`, `[enter]` etc.
@@ -32,9 +32,11 @@ Once image has been built successfuly, you can move to launching container from 
 **Steps (invoke as non-root user unless stated otherwise!):**
 1. Run the following in the repository directory:
 ```
-podman run --rm -it --userns keep-id --mount type=volume,source=<lib_vol_name>,destination=/shared_libs -v ./:/home/dev/PapayaRX ubuntu_quick:latest bash`
-- replace `<git_proj_dir>` with the actual local git project directory, e.g. `~/git_repos/PapayaRX/
+podman run --rm -it --userns keep-id \
+ --mount type=volume,source=<lib_vol_name>,destination=/shared_libs \
+ -v ./:/home/dev/PapayaRX ubuntu_quick:latest bash
 ```
+- replace `<git_proj_dir>` with the actual local git project directory, e.g. `~/git_repos/PapayaRX/
 - replace `<lib_vol_name>` with your _volume_ name (the one used for exporting header files)
 - If the host user you're running the container has UID other than 1000, use `--userns nomap` instead of `--userns keep-id` or configure _UID_/_GID_ mappings so `dev` container user _UID_/_GID_ matches your host non-root user _UID_/_GID_.
 2. On the first run, copy lib headers from the container's fs to `<lib_vol_name>`. In container issue:
