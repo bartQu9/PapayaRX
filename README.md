@@ -12,7 +12,7 @@ Good solution for "I need to setup and test this quickly". However, less control
 The latter (Arch) image fetches most libs sources and compiles it by itself (Gnuradio and its dependencies compilation is main point of interest). 
 It can take a bit to complete compilation, but we benefit from knowing what's happening under the hood, and we can dig easier if something (especially related to GR) crashes.
 
-**Steps (Invoke as non-root user unless stated otherwise!):**
+**Steps (invoke as non-root user unless stated otherwise!):**
 1. Create _volume_ for exhibiting lib header files installed inside the container to the host-ran IDE.
 `podman volume create <lib_vol_name>`
 2. Mount volume
@@ -24,12 +24,12 @@ exit
 3. Create symbolic link to the volume `ln -s $(podman volume inspect --format "{{.Mountpoint}}" <lib_vol_name>) $(git rev-parse --show-toplevel)/podman/devel/headers`
 4. Enter `podman/devel/<flavour>/` directory and run:
 `podman build --tag ubuntu_quick:latest --stdin ./`
-5. Embrace in patience and guide ubuntu's dpkg installers whenever needed by hitting `y`, `[enter]` etc.
+5. Arm yourself with patience and guide ubuntu's dpkg installers whenever needed by hitting `y`, `[enter]` etc.
 
 Once image has been built successfuly, you can move to launching container from its image.
 
 ### Launching container
-**Steps (Invoke as non-root user unless stated otherwise!):**
+**Steps (invoke as non-root user unless stated otherwise!):**
 1. Run
 `podman run --rm -it --userns keep-id --mount type=volume,source=<lib_vol_name>,destination=/shared_libs ubuntu_quick:latest bash`
 - replace `<git_proj_dir>` with the actual local git project directory, e.g. `~/git_repos/PapayaRX/`
