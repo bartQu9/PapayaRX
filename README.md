@@ -54,3 +54,8 @@ _NOTE: This step is not mandatory, I use this to have references to header files
 2. Create `build` directory: `mkdir build`
 3. Build Makefiles `cmake ..`
 4. Build project `make -j8`
+
+## TODOS
+[] Doxygen
+[] .deb, .rpm cmake
+[] utests
